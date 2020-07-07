@@ -23,15 +23,17 @@ shift : drop all 2 active"""
                 mx = obj.matrix_world
                 if len(objs) > 1:
                     if obj != bpy.context.object:
-                        minz = min((mx @ v.co)[2] for v in obj.data.vertices)
+                        minz = [mx @ Vector(corner) for corner in obj.bound_box][0][2]
+                        # minz = min((mx @ v.co)[2] for v in obj.data.vertices) #test
                         List.append(minz)
                     # get top bbox location / store active Z location
                     elif obj == bpy.context.object:
                         minz = min((mx @ v.co)[2] for v in obj.data.vertices)
                         List.append(minz)
-                        maxz = [mx @ Vector(corner) for corner in obj.bound_box][2][2]
+                        maxz = max((mx @ v.co)[2] for v in obj.data.vertices)
+                        #maxz = [mx @ Vector(corner) for corner in obj.bound_box][2][2]  #bounding box method seem to be some error
                         LZ = obj.location[2]
-                        #print(obj, maxz)
+                        # print(obj, maxz)
                 else:
                     minz = min((mx @ v.co)[2] for v in obj.data.vertices)
                     List.append(minz)
@@ -53,11 +55,13 @@ shift : drop all 2 active"""
 
         if event.ctrl:
             for obj in objs:
-                if obj.type == "MESH":
+                if obj == bpy.context.object:
+                    obj.location[2] = LZ
+                elif obj != bpy.context.object:
                     mx = obj.matrix_world
+                    # drop to select
                     minz = min((mx @ v.co)[2] for v in obj.data.vertices)
-                    #drop each
-                    mx.translation.z -= minz
+                    mx.translation.z -= minz - maxz
 
 
         return {'FINISHED'}

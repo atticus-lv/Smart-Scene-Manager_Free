@@ -39,17 +39,22 @@ class LF_Menu(Menu):
         #row.operator("object.export_obj", text='FBX_WIP')
 
         #top
-        pie.operator("object.trans_psr")
+        box = pie.split().column()
+        row = box.row(align=False)
+        row.scale_y = 1.5
+        row.operator("interface.simple_translater")
+        row.operator("object.trans_psr")
+
 
         #top Left
-        pie.operator("interface.simple_translater")
+        pie.operator("view3d.view_all", text="View All").center = True
 
         #top  Right
-        box = pie.split().column()
-        row = box.row(align=True)
-        row.scale_y = 2
-        row.operator("view3d.view_selected", text="Frame Selected")
-        row.operator("view3d.view_all", text="View All").center = True
+        # box = pie.split().column()
+        # row = box.row(align=True)
+        # row.scale_y = 1.5
+        # row.operator("view3d.view_selected", text="View Selected")
+        pie.operator("view3d.view_selected", text="View Selected")
 
         #left bottom
         pie.operator("render.render")
