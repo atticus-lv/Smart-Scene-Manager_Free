@@ -36,7 +36,7 @@ class LF_Menu(Menu):
         #row.operator("object.export_obj", text='FBX_WIP')
 
         #top3 bottome
-        pie.operator("object.PSRreset")
+        pie.operator("object.transPSR")
         pie.operator("view3d.view_all", text="View All").center = True
         pie.operator("view3d.view_selected", text="Frame Selected")
 

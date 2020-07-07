@@ -1,12 +1,5 @@
 #camera ops
-
 import bpy
-
-
-
-
-
-
 
 class ActiveCam(bpy.types.Operator):
     bl_idname = "view.activecam"

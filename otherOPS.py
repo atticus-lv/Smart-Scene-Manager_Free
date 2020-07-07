@@ -3,9 +3,9 @@ import os
 
 
 class PSRreset(bpy.types.Operator):
-    """点一下就可以翻译了"""
-    bl_idname = "object.PSRreset"
-    bl_label = "transfrom PSR to select"
+    """transfrom PSR to select"""
+    bl_idname = "object.transPSR"
+    bl_label = "Transfrom PSR"
 
     def execute(self, context):
         active = bpy.context.active_object
