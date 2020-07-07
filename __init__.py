@@ -20,7 +20,7 @@ else:
     from .UI import LF_Menu
     from .CamOPS import AddViewCam, FilpCam, ActiveCam
     from .D2FOPS import Drop2floor
-    from .otherOPS import Translater, ExportObj
+    from .otherOPS import Translater, ExportObj,PSRreset
 
 import bpy
 
@@ -28,7 +28,7 @@ classes = (
     LF_Menu,
     ActiveCam,FilpCam,AddViewCam,
     Drop2floor,
-    ExportObj,Translater,
+    ExportObj,Translater,PSRreset,
 )
 
 addon_keymaps = []

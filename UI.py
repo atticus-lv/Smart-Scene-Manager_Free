@@ -32,10 +32,11 @@ class LF_Menu(Menu):
         row = box.row(align=False)
         row.scale_y = 1.5
         row.operator("object.export_obj")
+        row.operator("interface.simple_translater")
         #row.operator("object.export_obj", text='FBX_WIP')
 
         #top3 bottome
-        pie.operator("interface.simple_translater")
+        pie.operator("object.PSRreset")
         pie.operator("view3d.view_all", text="View All").center = True
         pie.operator("view3d.view_selected", text="Frame Selected")
 

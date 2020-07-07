@@ -1,6 +1,34 @@
 import bpy
 import os
 
+
+class PSRreset(bpy.types.Operator):
+    """点一下就可以翻译了"""
+    bl_idname = "object.PSRreset"
+    bl_label = "transfrom PSR to select"
+
+    def execute(self, context):
+        active = bpy.context.active_object
+        objs = bpy.context.selected_objects
+
+        def get_TL():
+            for obj in objs:
+                if obj == active:
+                    TL = obj.location
+                    break
+            return TL
+
+        def apply_TL(TL):
+            for obj in objs:
+                if obj != active:
+                    obj.location = TL
+
+        TL = get_TL()
+        apply_TL(TL)
+
+        return {'FINISHED'}
+
+
 class Translater(bpy.types.Operator):
     """点一下就可以翻译了"""
     bl_idname = "interface.simple_translater"
