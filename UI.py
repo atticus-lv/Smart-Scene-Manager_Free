@@ -48,8 +48,8 @@ class LF_Menu(Menu):
         box = pie.split().column()
         row = box.row(align=True)
         row.scale_y = 2
-        box.operator("view3d.view_selected", text="Frame Selected")
-        box.operator("view3d.view_all", text="View All").center = True
+        row.operator("view3d.view_selected", text="Frame Selected")
+        row.operator("view3d.view_all", text="View All").center = True
 
         #left bottom
         pie.operator("render.render")
