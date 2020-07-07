@@ -2,10 +2,15 @@ import bpy
 import os
 
 
-class PSRreset(bpy.types.Operator):
-    """transfrom PSR to select"""
-    bl_idname = "object.transPSR"
-    bl_label = "Transfrom PSR"
+class TransPSR(bpy.types.Operator):
+    """Transform selected object(s) to active """
+    bl_idname = "object.trans_psr"
+    bl_label = "TransPSR"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    @classmethod
+    def poll(cls, context):
+        return context.active_object is not None
 
     def execute(self, context):
         active = bpy.context.active_object
@@ -23,8 +28,11 @@ class PSRreset(bpy.types.Operator):
                 if obj != active:
                     obj.location = TL
 
-        TL = get_TL()
-        apply_TL(TL)
+        if len(objs) == 1:
+            self.report({'ERROR'}, ' select 2 more object .')
+        else:
+            TL = get_TL()
+            apply_TL(TL)
 
         return {'FINISHED'}
 

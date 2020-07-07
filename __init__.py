@@ -1,8 +1,9 @@
 # -*- coding:utf-8 -*-
+
 bl_info = {
     "name": "Little Function",
     "author": "Atticus",
-    "version": (0, 26),
+    "version": (0, 27),
     "blender": (2, 83, 1),
     "location": " 3D View > Object mode > Shortcut 'F' ",
     "description": "some small useful tool",
@@ -20,7 +21,7 @@ else:
     from .UI import LF_Menu
     from .CamOPS import AddViewCam, FilpCam, ActiveCam
     from .D2FOPS import Drop2floor
-    from .otherOPS import Translater, ExportObj,PSRreset
+    from .otherOPS import Translater, ExportObj,TransPSR
 
 import bpy
 
@@ -28,7 +29,7 @@ classes = (
     LF_Menu,
     ActiveCam,FilpCam,AddViewCam,
     Drop2floor,
-    ExportObj,Translater,PSRreset,
+    ExportObj,Translater,TransPSR,
 )
 
 addon_keymaps = []
@@ -39,7 +40,8 @@ def register():
     # menu shortcuts
     wm = bpy.context.window_manager
     if wm.keyconfigs.addon:
-        km = wm.keyconfigs.addon.keymaps.new(name='Object Mode')
+        km = wm.keyconfigs.addon.keymaps.new(name='3D View Generic', space_type='VIEW_3D')
+        #km = wm.keyconfigs.addon.keymaps.new(name='Object Mode')
         kmi = km.keymap_items.new('wm.call_menu_pie', 'F', 'PRESS')
         kmi.properties.name = "LF_Menu"
         addon_keymaps.append((km, kmi))

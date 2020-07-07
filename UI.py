@@ -4,6 +4,10 @@ from bpy.types import Menu
 class LF_Menu(Menu):
     bl_label = "Little function"
 
+    @classmethod
+    def poll(cls, context):
+        return context.mode in {'OBJECT', 'EDIT_MESH'}
+
     def draw(self, context):
         layout = self.layout
         pie = layout.menu_pie()
@@ -32,13 +36,20 @@ class LF_Menu(Menu):
         row = box.row(align=False)
         row.scale_y = 1.5
         row.operator("object.export_obj")
-        row.operator("interface.simple_translater")
         #row.operator("object.export_obj", text='FBX_WIP')
 
-        #top3 bottome
-        pie.operator("object.transPSR")
-        pie.operator("view3d.view_all", text="View All").center = True
-        pie.operator("view3d.view_selected", text="Frame Selected")
+        #top
+        pie.operator("object.trans_psr")
+
+        #top Left
+        pie.operator("interface.simple_translater")
+
+        #top  Right
+        box = pie.split().column()
+        row = box.row(align=True)
+        row.scale_y = 2
+        box.operator("view3d.view_selected", text="Frame Selected")
+        box.operator("view3d.view_all", text="View All").center = True
 
         #left bottom
         pie.operator("render.render")
