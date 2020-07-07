@@ -1,12 +1,11 @@
-# Little function V 0.26
+# Little function V 0.27
 
 ### [blender 2.8+ addon ]
 
-#### V 0,26：
+#### V 0.27：
 
-1. **d2f** now can drop select to active(true select)
-2. add a render button
-3. fix error report
+1. fix drop 2 select error(can not drop to a rotate obj )
+2. add psr transform 
 
 ### Intro (EN)
 
@@ -17,6 +16,10 @@ When building my scene,some repeated steps make me not happy…So I make this sm
 
 
 UI pie menu in 3d view with **“F”**
+
++ PSR transform
+
+> transform (*now Location only*) selected obj to active object(at least 2 object)
 
 + translate interface by one click
 
@@ -57,6 +60,10 @@ UI pie menu in 3d view with **“F”**
 插件将命名为 Little function，即小功能合集
 
 可以在3D视窗中**按F键**呼出饼菜单
+
++ PSR 转移
+
+    > 将所选物体转移位置到激活物体上
 
 + 一键翻译
 
