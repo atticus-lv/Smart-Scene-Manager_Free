@@ -27,6 +27,8 @@ shift : drop all 2 active"""
                         List.append(minz)
                     # get top bbox location / store active Z location
                     elif obj == bpy.context.object:
+                        minz = min((mx @ v.co)[2] for v in obj.data.vertices)
+                        List.append(minz)
                         maxz = [mx @ Vector(corner) for corner in obj.bound_box][2][2]
                         LZ = obj.location[2]
                         #print(obj, maxz)
