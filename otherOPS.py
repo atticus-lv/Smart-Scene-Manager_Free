@@ -51,11 +51,12 @@ class Translater(bpy.types.Operator):
 
 
 class ExportObj(bpy.types.Operator):
-    """将导出所选物体到blend文件目录下（需保存）"""
+    """export select obj to blend file dir
+ctrl: export as fbx"""
     bl_idname = "object.export_obj"
     bl_label = "export_obj"
 
-    def execute(self, context):
+    def invoke(self, context,event):
         # 导出所选obj
         try:
             selection = bpy.context.selected_editable_objects
@@ -63,14 +64,25 @@ class ExportObj(bpy.types.Operator):
             directory_path = os.path.dirname(blend_file_path) + "\\" + "export_files"
             if not os.path.exists(directory_path):
                 os.makedirs(directory_path)
-
-            directory = directory_path + "\\" + selection[0].name + ".obj"
+            form = 'obj'; f = 0
+            if event.ctrl:
+                form = 'fbx'; f = 1
+            directory = directory_path + "\\" + selection[0].name + form
             # print(directory)
-            bpy.ops.export_scene.obj(filepath=directory, axis_up='Y', axis_forward='-Z',
+            if f == 0:
+                bpy.ops.export_scene.obj(filepath=directory, axis_up='Y', axis_forward='-Z',
                                      use_selection=True, use_materials=True, use_uvs=True, use_normals=True)
+                self.report({'INFO'}, 'finish! export obj to%s.' % (directory))
+            elif f == 1:
+                bpy.ops.export_scene.fbx(filepath=directory, object_types = {'ARMATURE','CAMERA','EMPTY','LIGHT','MESH','OTHER'},
+                                         use_mesh_modifiers = True,use_mesh_modifiers_render = True,use_subsurf =True,
+                                         use_selection=True, use_materials=True)
+                self.report({'INFO'}, 'finish! export fbx to%s.'% (directory))
+
         except IndexError as I:
-            self.report({'INFO'}, 'no select object .')
+            self.report({'ERROR'}, 'no select object .')
         return {'FINISHED'}
+
 
 
 # class LightCheck(bpy.types.Operator):
