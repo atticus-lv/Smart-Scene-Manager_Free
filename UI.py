@@ -61,4 +61,8 @@ class LF_Menu(Menu):
 
         # right bottom
         #pie.operator("object.lightcheck")
+        box = pie.split().column()
+        row = box.row(align=True)
+        row.operator("view.setcama")
+        row.operator("view.light_check")
 

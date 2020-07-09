@@ -19,17 +19,17 @@ if "bpy" in locals():
 
 else:
     from .UI import LF_Menu
-    from .CamOPS import AddViewCam, FilpCam, ActiveCam
+    from .CamOPS import AddViewCam, FilpCam, ActiveCam,SetCamA
     from .D2FOPS import Drop2floor
-    from .otherOPS import Translater, ExportObj,TransPSR
+    from .otherOPS import Translater, ExportObj,TransPSR,LightCheck
 
 import bpy
 
 classes = (
     LF_Menu,
-    ActiveCam,FilpCam,AddViewCam,
+    ActiveCam,FilpCam,AddViewCam,SetCamA,
     Drop2floor,
-    ExportObj,Translater,TransPSR,
+    ExportObj,Translater,TransPSR,LightCheck
 )
 
 addon_keymaps = []

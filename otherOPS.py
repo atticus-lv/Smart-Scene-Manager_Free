@@ -64,36 +64,35 @@ ctrl: export as fbx"""
             directory_path = os.path.dirname(blend_file_path) + "\\" + "export_files"
             if not os.path.exists(directory_path):
                 os.makedirs(directory_path)
-            form = 'obj'; f = 0
+            form = '.obj'; f = 0
             if event.ctrl:
-                form = 'fbx'; f = 1
+                form = '.fbx'; f = 1
             directory = directory_path + "\\" + selection[0].name + form
             # print(directory)
             if f == 0:
                 bpy.ops.export_scene.obj(filepath=directory, axis_up='Y', axis_forward='-Z',
                                      use_selection=True, use_materials=True, use_uvs=True, use_normals=True)
-                self.report({'INFO'}, 'finish! export obj to%s.' % (directory))
+                self.report({'INFO'}, 'finish! export obj to %s.' % (directory))
             elif f == 1:
                 bpy.ops.export_scene.fbx(filepath=directory, object_types = {'ARMATURE','CAMERA','EMPTY','LIGHT','MESH','OTHER'},
                                          use_mesh_modifiers = True,use_mesh_modifiers_render = True,use_subsurf =True,
-                                         use_selection=True, use_materials=True)
-                self.report({'INFO'}, 'finish! export fbx to%s.'% (directory))
+                                         use_selection=True)
+                self.report({'INFO'}, 'finish! export fbx to %s.'% (directory))
 
         except IndexError as I:
             self.report({'ERROR'}, 'no select object .')
         return {'FINISHED'}
 
 
+class LightCheck(bpy.types.Operator):
+    """change to false color"""
+    bl_idname = "view.light_check"
+    bl_label = "Simple Object Operator"
+    bl_options = {'REGISTER', 'UNDO'}
 
-# class LightCheck(bpy.types.Operator):
-#     """Tooltip"""
-#     bl_idname = "object.lightcheck"
-#     bl_label = "Simple Object Operator"
-#
-#     def execute(self, context):
-#         if bpy.context.scene.view_settings.view_transform != 'False Color':
-#             bpy.context.scene.view_settings.view_transform = 'False Color'
-#         else:
-#              bpy.context.scene.view_settings.view_transform = 'Filmic'
-#
-#         return {'FINISHED'}
+    def execute(self, context):
+        if bpy.context.scene.view_settings.view_transform != 'False Color':
+            bpy.context.scene.view_settings.view_transform = 'False Color'
+        else:
+            bpy.context.scene.view_settings.view_transform = 'Filmic'
+        return {'FINISHED'}
