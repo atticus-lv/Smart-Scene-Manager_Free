@@ -1,11 +1,12 @@
-# Little function V 0.27
+# Little function V 0.28
 
 ### [blender 2.8+ addon ]
 
-#### V 0.27：
+#### V 0.28：
 
-1. fix drop 2 select error(can not drop to a rotate obj )
-2. add psr transform 
+1. add lightcheck
+2. add camera_pp alpha
+3. add error report
 
 ### Intro (EN)
 
