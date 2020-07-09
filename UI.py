@@ -64,5 +64,6 @@ class LF_Menu(Menu):
         box = pie.split().column()
         row = box.row(align=True)
         row.operator("view.setcama")
+        row.scale_y = 1.5
         row.operator("view.light_check")
 

@@ -3,22 +3,22 @@ import bpy
 
 
 class SetCamA(bpy.types.Operator):
-    """add view cam
-ctrl: add ortho cam"""
+    """set cam passepartout between 0.5/1"""
     bl_idname = "view.setcama"
-    bl_label = "进入所选摄像机"
+    bl_label = "Set Cam PP"
     bl_options = {'REGISTER', 'UNDO'}
 
     def execute(self, context):
-        objs = bpy.context.selected_objects
-        for obj in objs:
-            if obj.type == "CAMERA" :
-                if bpy.context.object.data.passepartout_alpha == 1:
-                    bpy.context.object.data.passepartout_alpha = 0.5
-                else:
-                    bpy.context.object.data.passepartout_alpha = 0.5
+        obj = bpy.context.object
+        if obj.type == "CAMERA":
+            obj = bpy.context.object
+            if obj.data.passepartout_alpha == 1:
+                obj.data.passepartout_alpha = 0.5
             else:
-                self.report({'ERROR'}, 'select camera only.')
+                obj.data.passepartout_alpha = 1
+        else:
+            self.report({'ERROR'}, 'select camera only.')
+            
         return {'FINISHED'}
 
 

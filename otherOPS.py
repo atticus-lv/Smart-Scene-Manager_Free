@@ -87,7 +87,7 @@ ctrl: export as fbx"""
 class LightCheck(bpy.types.Operator):
     """change to false color"""
     bl_idname = "view.light_check"
-    bl_label = "Simple Object Operator"
+    bl_label = "LightCheck"
     bl_options = {'REGISTER', 'UNDO'}
 
     def execute(self, context):
