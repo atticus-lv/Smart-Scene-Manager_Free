@@ -2,10 +2,11 @@
 
 ### [blender 2.8+ addon ]
 
-#### V 0.29：
+#### V 0.3：
 
-1. add lightcheck（change looks）
-2. fix d2f（select no-mesh object will report error）
+1. add focus picker
+2. rewrite d2f
+3. fix error
 
 ### Intro (EN)
 
@@ -19,33 +20,47 @@ UI pie menu in 3d view with **“F”**
 
 + PSR transform
 
-> transform (*now Location only*) selected obj to active object(at least 2 object)
+> transform (*now Location ) selected obj to active object(at least 2 object)
+>
+> **ctrl** ：trans rotation & location
+>
+> **shift** ：trans scale & location
+>
+> **ctrl shift**： PSR transform
 
 + translate interface by one click
 
 > English is not my native language,so switch between English might be useful
 
-+ **drop to floor** *ctrl ：drop each to floor* **F-D**
++ **drop to floor**  **F-D**
 
 > make the object get onto the floor ! also the with camera or lights ,etc (if selected with mesh)
 >
-> ctrl ：drop each to floor
+> **ctrl ：**drop each to floor
 >
-> shift：drop select to active
+> **shift：**drop select to active
+>
+> **alt ：**only effect mesh object （work with ctrl shift）
 
-+ add cam to view *ctrl ：Ortho Cam* **F-A**
++ **add cam to view**  **F-A**
 
-> one click add cam to view
-> then make it the scene cam
-> Ctrl：add ortho Cam 
+> one click add cam to view，then make it the scene cam
+>
+> **Ctrl：**add ortho Cam 
+>
+> **shift：**add Cam that look at the select object
 
-+ filp cam (x default, ctrl:z ,shift:y) **F-F**
++ filp cam（x axis default）  **F-F**
 
 > flip the camera ,helpful for checking the composition of the picture
+>
+> **ctrl:** z  axis
+>
+> **shift:** y axis
 
 + enter selected cam **F-E**
 
-> select one and set it to scene cam and enter it
+> select one and set it scene cam then enter it
 
 + select and export obj (to where your blend file located)
 
@@ -64,29 +79,37 @@ UI pie menu in 3d view with **“F”**
 + PSR 转移
 
     > 将所选物体转移位置到激活物体上
+    >
+    > **ctrl** ：位置和旋转转移
+    >
+    > **shift** ：位置和缩放转移
+    >
+    > **ctrl shift**： PSR 转移
 
 + 一键翻译
 
     > 在搜索命令和节点上，英文版更为直观，多看中英对照有利于快速上手英文版
 
-+ **drop to floor** *ctrl ：drop each to floor*  **F-D**
++ **drop to floor**  **F-D**
 
     > 以最低物体为基准，将所选网格对齐世界地面
-    > Ctrl ：逐个物体对齐地面
+    > **Ctrl** ：逐个物体对齐地面
     >
-    > Shift : 将选中的物体对齐到激活物体（橙色）的顶端
-
-+ 视角添加相机 *ctrl ：Ortho Cam*  **F-A**
-
-    > 免去繁琐的 "shift a添加相机，进入相机，调整相机到位"的步骤
+    > **Shift** : 将选中的物体对齐到激活物体（橙色）的顶端
     >
-    > 直接在当前视角生成并进入相机
+    > **alt** ：只对网格物体作用（配合使用）
+
++ **视角添加相机**   **F-A**
+
+    > 免去繁琐的 "shift a添加相机，进入相机，调整相机到位"的步骤，直接在当前视角生成并进入相机
     >
-    > Ctrl：添加正交摄像机 
+    > **Ctrl**：添加正交摄像机 
+    >
+    > **shift**：对激活物体添加一个朝向摄像机
 
-+ 相机翻转 (x default, ctrl:z ,shift:y) **F-F**
++ 相机翻转  **F-F**
 
-    > 镜像翻转
+    > 镜像翻转 默认x轴向，**ctrl,shift** 可翻转 y,z 轴向
 
 + 进入所选相机视角 **F-E**
 

@@ -157,6 +157,6 @@ ctrl: change to false color"""
 
         look = bpy.context.scene.view_settings.look
         CM = bpy.context.scene.view_settings.view_transform
-        self.report({'INFO'}, 'Color view: %s Look: %s '% (CM,look))
+        self.report({'INFO'}, 'Color view: %s ; Contrast Look: %s '% (CM,look))
 
         return {'FINISHED'}

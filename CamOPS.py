@@ -4,7 +4,7 @@ from bpy_extras import view3d_utils
 from math import *
 
 class SetCamA(bpy.types.Operator):
-    """set cam passepartout between 0.5/1"""
+    """set cam passepartout between 0.5/0.9"""
     bl_idname = "view.setcama"
     bl_label = "Set Cam PP"
     bl_options = {'REGISTER', 'UNDO'}
@@ -14,12 +14,12 @@ class SetCamA(bpy.types.Operator):
             obj = bpy.context.object
             if obj.type == "CAMERA":
                 obj = bpy.context.object
-                if obj.data.passepartout_alpha == 1:
+                if obj.data.passepartout_alpha == 0.9:
                     obj.data.passepartout_alpha = 0.5
                 else:
-                    obj.data.passepartout_alpha = 1
+                    obj.data.passepartout_alpha = 0.9
             else:
-                self.report({'ERROR'}, 'select camera only.')
+                self.report({'ERROR'}, 'not camera select.')
         except Exception as e:
             pass
 
@@ -161,7 +161,7 @@ def measure(first, second):
 
 class focusPicker(bpy.types.Operator):
     ''' pick focus
-shift: generate empty target(WIP)'''
+shift: generate empty target'''
     bl_idname = "view3d.focus_picker"
     bl_label = "Pick Focus "
     bl_options = {'REGISTER', 'UNDO'}
@@ -181,17 +181,18 @@ shift: generate empty target(WIP)'''
                 focusDis = measure(Location,cam.location)
                 print(focusDis)
                 cam.data.dof.use_dof = True
-                #add target
-                if event.shift:
-                    target = bpy.ops.object.empty_add(type='PLAIN_AXES', align='WORLD', location=(0, 0, 0))
-                    target.location = Location
-                    cam.data.dof.focus_object = target
-                    focusDis = 0
-
 
                 cam.data.dof.focus_distance = focusDis
+                #add target
+                if event.shift:
+                    bpy.ops.object.empty_add(type='PLAIN_AXES', align='WORLD', location=(0, 0, 0))
+                    target = bpy.context.object
+                    target.name = "FocusTG"+" 4 "+ cam.name
+                    target.location = Location
+                    cam.data.dof.focus_object = target
+
             except Exception as e:
-                self.report({'ERROR'}, 'No scene camera !%s'%(e) )
+                self.report({'ERROR'}, 'No scene camera!\n%s'%(e) )
 
             return {'FINISHED'}
         elif event.type in {'RIGHTMOUSE', 'ESC'}:
