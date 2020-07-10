@@ -3,25 +3,25 @@
 bl_info = {
     "name": "Little Function",
     "author": "Atticus",
-    "version": (0, 27),
+    "version": (0, 29),
     "blender": (2, 83, 1),
     "location": " 3D View > Object mode > Shortcut 'F' ",
     "description": "some small useful tool",
     "category": "Interface",
 }
 
-if "bpy" in locals():
-    import imp
-    imp.reload(UI)
-    imp.reload(CamOPS)
-    imp.reload(D2FOPS)
-    imp.reload(otherOPS)
-
-else:
-    from .UI import LF_Menu
-    from .CamOPS import AddViewCam, FilpCam, ActiveCam,SetCamA
-    from .D2FOPS import Drop2floor
-    from .otherOPS import Translater, ExportObj,TransPSR,LightCheck
+# if "bpy" in locals():
+#     import imp
+#     imp.reload(UI)
+#     imp.reload(CamOPS)
+#     imp.reload(D2FOPS)
+#     imp.reload(otherOPS)
+#
+# else:
+from .UI import LF_Menu
+from .CamOPS import AddViewCam, FilpCam, ActiveCam,SetCamA
+from .D2FOPS import Drop2floor
+from .otherOPS import Translater, ExportObj,TransPSR,LightCheck
 
 import bpy
 
