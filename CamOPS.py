@@ -23,6 +23,7 @@ class SetCamA(bpy.types.Operator):
 
 
 class ActiveCam(bpy.types.Operator):
+    """enter select cam"""
     bl_idname = "view.activecam"
     bl_label = "进入所选摄像机"
     bl_options = {'REGISTER', 'UNDO'}

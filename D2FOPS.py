@@ -1,11 +1,11 @@
 import bpy
-from mathutils import Vector
 
 
 class Drop2floor(bpy.types.Operator):
     """drop all 2 floor
 ctrl : drop each 2 floor
-shift : drop 2 active"""
+shift : drop 2 active
+(alt: only mesh object)"""
     bl_idname = "object.drop2floor"
     bl_label = "D2F"
     bl_options = {'REGISTER', 'UNDO'}
@@ -15,50 +15,69 @@ shift : drop 2 active"""
         return context.active_object is not None
 
     def invoke(self, context, event):
+
         objs = bpy.context.selected_objects
-        List = []
-        #drop all
+        active = bpy.context.active_object
+        vertex_List = []; other_List=[]; mesh_List=[]; other_Z = []
+        # orgin location OL # no mesh location NML # maxz(1)
+
+        # drop all
         for obj in objs:
             mx = obj.matrix_world
-            if len(objs) > 1:
-                if obj != bpy.context.object and obj.type == "MESH":
-                    minz = [mx @ Vector(corner) for corner in obj.bound_box][0][2]
-                    List.append(minz)
-                # get active obj Z location
-                elif obj == bpy.context.object and obj.type == "MESH" :
-                    minz = min((mx @ v.co)[2] for v in obj.data.vertices)
-                    List.append(minz)
-                    maxz = max((mx @ v.co)[2] for v in obj.data.vertices)
-                    LZ = obj.location[2]
-                elif obj == bpy.context.object and obj.type != "MESH":
-                    maxz = obj.location[2]
-
-        List.sort()
-        # drop all 2 floor
-        for obj in objs:
             if obj.type == "MESH":
-                mx = obj.matrix_world
-                mx.translation.z -= List[0]
-
-        if event.shift:
-            for obj in objs:
-               if obj == bpy.context.object and obj.type == "MESH":
-                   obj.location[2] = LZ
-               elif obj != bpy.context.object and obj.type == "MESH":
-                   mx = obj.matrix_world
-                   # drop to select
-                   minz = min((mx @ v.co)[2] for v in obj.data.vertices)
-                   mx.translation.z -= minz - maxz
-               else:
-                   pass
-
-        if event.ctrl:
-            for obj in objs:
-                if obj.type == "MESH":
-                    mx = obj.matrix_world
+                minz = min((mx @ v.co)[2] for v in obj.data.vertices)
+                if obj == active:
                     minz = min((mx @ v.co)[2] for v in obj.data.vertices)
-                    # drop each
+                    OL = obj.location[2]
+                    maxz = max((mx @ v.co)[2] for v in obj.data.vertices)
+                mesh_List.append(obj)
+                vertex_List.append(minz)
+
+            elif obj.type != "MESH" :
+                NMZ = obj.location[2]
+                other_List.append(obj)
+                other_Z.append(NMZ)
+                if obj == active:
+                    NOL = obj.location[2]
+                    maxz = NOL
+
+        try:
+            vertex_List.sort()
+        except IndexError as e:
+            active.location[2] = 0
+
+
+        for obj in objs:
+            mx = obj.matrix_world
+            mx.translation.z -= vertex_List[0]
+            # move mesh
+            if obj in mesh_List:
+                minz = min((mx @ v.co)[2] for v in obj.data.vertices)
+                if event.shift :
+                    if obj == active:
+                        obj.location[2] = OL
+                    else:
+                        minz = min((mx @ v.co)[2] for v in obj.data.vertices)
+                        mx.translation.z -= minz - maxz
+                if event.ctrl:
                     mx.translation.z -= minz
 
-        return {'FINISHED'}
 
+            if obj in other_List and len(other_List) != 0:
+                # move not-mesh
+                if event.alt :
+                    mx.translation.z += vertex_List[0]
+                if event.shift:
+                    if obj == active:
+                        obj.location[2]= NOL
+                    else:
+                        if event.alt:
+                            mx.translation.z -= vertex_List[0]
+                        else:
+                            obj.location[2] = maxz
+                if event.ctrl:
+                    obj.location[2] =0
+                    if event.alt:
+                        obj.location[2] = other_Z[other_List.index(obj)]
+
+        return {'FINISHED'}
