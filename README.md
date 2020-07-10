@@ -1,12 +1,11 @@
-# Little function V 0.28
+# Little function 
 
 ### [blender 2.8+ addon ]
 
-#### V 0.28：
+#### V 0.29：
 
-1. add lightcheck
-2. add camera_pp alpha
-3. add error report
+1. add lightcheck（change looks）
+2. fix d2f（select no-mesh object will report error）
 
 ### Intro (EN)
 

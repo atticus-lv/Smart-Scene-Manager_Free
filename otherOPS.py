@@ -145,16 +145,18 @@ ctrl: change to false color"""
         if event.ctrl:
             if i > 0:
                 bpy.context.scene.view_settings.look = Looks[i-1]
+
             else:
                 bpy.context.scene.view_settings.look = Looks[6]
 
             if CM != 'False Color':
-                bpy.context.scene.view_settings.view_transform = 'False Color'
+                bpy.context.scene.view_settings.view_transform= 'False Color'
 
             else:
                 bpy.context.scene.view_settings.view_transform = 'Filmic'
 
-
+        look = bpy.context.scene.view_settings.look
+        CM = bpy.context.scene.view_settings.view_transform
         self.report({'INFO'}, 'Color view: %s Look: %s '% (CM,look))
 
         return {'FINISHED'}
