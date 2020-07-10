@@ -72,7 +72,7 @@ shift : drop 2 active
                         obj.location[2]= NOL
                     else:
                         if event.alt:
-                            mx.translation.z -= vertex_List[0]
+                            obj.location[2] = other_Z[other_List.index(obj)]
                         else:
                             obj.location[2] = maxz
                 if event.ctrl:
