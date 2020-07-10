@@ -4,7 +4,7 @@ from bpy_extras import view3d_utils
 from math import *
 
 class SetCamA(bpy.types.Operator):
-    """set cam passepartout between 0.5/0.9"""
+    """set cam passepartout between 0.5/1"""
     bl_idname = "view.setcama"
     bl_label = "Set Cam PP"
     bl_options = {'REGISTER', 'UNDO'}
