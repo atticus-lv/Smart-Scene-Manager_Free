@@ -14,10 +14,10 @@ class SetCamA(bpy.types.Operator):
             obj = bpy.context.object
             if obj.type == "CAMERA":
                 obj = bpy.context.object
-                if obj.data.passepartout_alpha == 0.9:
+                if obj.data.passepartout_alpha == 1:
                     obj.data.passepartout_alpha = 0.5
                 else:
-                    obj.data.passepartout_alpha = 0.9
+                    obj.data.passepartout_alpha = 1
             else:
                 self.report({'ERROR'}, 'not camera select.')
         except Exception as e:
