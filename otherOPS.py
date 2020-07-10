@@ -78,9 +78,9 @@ class Translater(bpy.types.Operator):
     """点一下就可以翻译了"""
     bl_idname = "interface.simple_translater"
     bl_label = "点击翻译"
-    T = bpy.context.preferences.view.use_translate_interface
+    
     def execute(self, context):
-        if T == 0:
+        if bpy.context.preferences.view.use_translate_interface == 0:
             bpy.context.preferences.view.use_translate_interface = 1
         else:
             bpy.context.preferences.view.use_translate_interface = 0
