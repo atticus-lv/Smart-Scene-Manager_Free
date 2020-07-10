@@ -12,7 +12,7 @@
 
 When building my scene,some repeated steps make me not happy…So I make this small addon to improve my workflow.Hope you will like it
 
-![image-20200703180939060](image/image-20200703180939060.png)
+![image-20200710225604473](image/image-20200710225604473.png)
 
 
 
