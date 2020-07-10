@@ -27,6 +27,7 @@ class ActiveCam(bpy.types.Operator):
     bl_label = "进入所选摄像机"
     bl_options = {'REGISTER', 'UNDO'}
 
+    @classmethod
     def poll(cls, context):
         return context.active_object is not None
 

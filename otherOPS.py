@@ -78,9 +78,9 @@ class Translater(bpy.types.Operator):
     """点一下就可以翻译了"""
     bl_idname = "interface.simple_translater"
     bl_label = "点击翻译"
-
+    T = bpy.context.preferences.view.use_translate_interface
     def execute(self, context):
-        if bpy.context.preferences.view.use_translate_interface == 0:
+        if T == 0:
             bpy.context.preferences.view.use_translate_interface = 1
         else:
             bpy.context.preferences.view.use_translate_interface = 0
@@ -123,23 +123,24 @@ ctrl: export as fbx"""
 
 class LightCheck(bpy.types.Operator):
     """change looks
-click: change to false color"""
+ctrl: change to false color"""
     bl_idname = "view.light_check"
     bl_label = "LightCheck"
     bl_options = {'REGISTER', 'UNDO'}
 
     def invoke(self, context,event):
         Looks = ['Very Low Contrast', 'Low Contrast', 'Medium Contrast',
-                 'Medium High Contrast','High Contrast', 'Very High Contrast']
+                 'Medium High Contrast','High Contrast', 'Very High Contrast','None']
 
         look = bpy.context.scene.view_settings.look
+        CM = bpy.context.scene.view_settings.view_transform
         i = Looks.index(look)
-        if i < 5:
+        if i < 6:
             i += 1
         else:
             i = 0
+
         bpy.context.scene.view_settings.look = Looks[i]
-        report = i
 
         if event.ctrl:
             if i > 0:
@@ -147,13 +148,13 @@ click: change to false color"""
             else:
                 bpy.context.scene.view_settings.look = Looks[6]
 
-            if bpy.context.scene.view_settings.view_transform != 'False Color':
+            if CM != 'False Color':
                 bpy.context.scene.view_settings.view_transform = 'False Color'
-                report = 'False Color'
+
             else:
                 bpy.context.scene.view_settings.view_transform = 'Filmic'
-                report = 'Filmic'
 
-        self.report({'INFO'}, 'CM/Look: %s .'% (report))
+
+        self.report({'INFO'}, 'Color view: %s Look: %s '% (CM,look))
 
         return {'FINISHED'}
