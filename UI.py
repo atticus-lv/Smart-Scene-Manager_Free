@@ -17,9 +17,10 @@ class LF_Menu(Menu):
 
         #Right
         box = pie.split().column()
-        row = box.row(align=False)
+        row = box.row(align=True)
         row.scale_y = 1.5
         row.operator("object.add_view_camera")
+        row.operator("view3d.focus_picker")
 
         #Right box
         row = box.row(align=True)
