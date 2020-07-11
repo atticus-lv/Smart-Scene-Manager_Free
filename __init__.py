@@ -1,9 +1,15 @@
 # -*- coding:utf-8 -*-
 
+'''
+Thanks to Osama Arafa's Camera_SwitchMenu
+Help me learned to call ops in ops
+'''
+
+
 bl_info = {
     "name": "Little Function",
     "author": "Atticus",
-    "version": (0, 30),
+    "version": (0, 31),
     "blender": (2, 83, 1),
     "location": " 3D View > Object mode > Shortcut 'F' ",
     "description": "some small useful tool",
@@ -12,7 +18,7 @@ bl_info = {
 
 
 from .UI import LF_Menu
-from .CamOPS import AddViewCam, FilpCam, ActiveCam,SetCamA,focusPicker
+from .CamOPS import AddViewCam, FilpCam, ActiveCam,SetCamA,focusPicker,CameraSwitcherMenu,CamList
 from .D2FOPS import Drop2floor
 from .otherOPS import Translater, ExportObj,TransPSR,LightCheck
 
@@ -20,7 +26,7 @@ import bpy
 
 classes = (
     LF_Menu,
-    ActiveCam,FilpCam,AddViewCam,SetCamA,focusPicker,
+    ActiveCam,FilpCam,AddViewCam,SetCamA,focusPicker,CameraSwitcherMenu,CamList,
     Drop2floor,
     ExportObj,Translater,TransPSR,LightCheck
 )

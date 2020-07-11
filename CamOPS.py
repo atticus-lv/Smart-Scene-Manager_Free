@@ -1,4 +1,5 @@
 #camera ops
+
 import bpy
 from bpy_extras import view3d_utils
 from math import *
@@ -26,8 +27,36 @@ class SetCamA(bpy.types.Operator):
         return {'FINISHED'}
 
 
+class CamList(bpy.types.Operator):
+    """Switch Scene Camera"""
+    bl_idname = "view.switch_camera"
+    bl_label = "Switch 2 "
+    bl_options = {'INTERNAL'}
+
+    CamName: bpy.props.StringProperty(name="Camera")
+
+    def execute(self, context):
+        bpy.context.scene.camera = bpy.data.objects[self.CamName]
+        context.area.spaces[0].region_3d.view_perspective = 'CAMERA'
+        return {'FINISHED'}
+
+
+class CameraSwitcherMenu(bpy.types.Menu):
+    bl_label = "Switch Camera"
+    bl_idname = "VIEW3D_MT_camera_switcher_menu"
+
+    def draw(self, context):
+        layout = self.layout
+        for obj in context.scene.objects:
+            if obj.type == "CAMERA":
+                switcher = layout.operator("view.switch_camera", text=obj.name)
+                switcher.CamName = obj.name
+
+
+
 class ActiveCam(bpy.types.Operator):
-    """enter select cam"""
+    """enter select cam
+shift ： popup camera list"""
     bl_idname = "view.activecam"
     bl_label = "enter select cam"
     bl_options = {'REGISTER', 'UNDO'}
@@ -36,10 +65,11 @@ class ActiveCam(bpy.types.Operator):
     def poll(cls, context):
         return context.active_object is not None
 
-    def execute(self, context):
+    def invoke(self, context, event):
         objs = bpy.context.selected_objects
+
         for obj in objs:
-            if obj.type == "CAMERA":
+            if obj.type == "CAMERA" and not event.shift :
                 bpy.context.scene.camera = obj
                 for area in bpy.context.screen.areas:
                     if area.type == 'VIEW_3D':
@@ -47,6 +77,10 @@ class ActiveCam(bpy.types.Operator):
                         self.report({'INFO'}, 'Active Cam Done.')
                         break
                 break
+        if event.shift:
+            #call camera list
+            bpy.ops.wm.call_menu(name=CameraSwitcherMenu.bl_idname)
+
         return {'FINISHED'}
 
 
@@ -145,10 +179,7 @@ def raycast(context, event):
     ray_origin = view3d_utils.region_2d_to_origin_3d(region, rv3d, coord)
 
     result, location, normal, index, object, matrix = scene.ray_cast(viewlayer, ray_origin, view_vector)
-
-
-    print(location)
-
+    #print(location)
     return location
 
 def measure(first, second):

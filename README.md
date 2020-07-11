@@ -2,9 +2,9 @@
 
 ### [blender 2.8+ addon ]
 
-#### V 0.3：
+#### V 0.31：
 
-1. add focus picker
+1. add focus picker，camlist
 2. rewrite d2f
 3. fix error
 
@@ -20,13 +20,13 @@ UI pie menu in 3d view with **“F”**
 
 + PSR transform
 
-> transform (*now Location ) selected obj to active object(at least 2 object)
->
-> **ctrl** ：trans rotation & location
->
-> **shift** ：trans scale & location
->
-> **ctrl shift**： PSR transform
+    > transform (*now Location ) selected obj to active object(at least 2 object)
+    >
+    > **ctrl** ：trans rotation & location
+    >
+    > **shift** ：trans scale & location
+    >
+    > **ctrl shift**： PSR transform
 
 + translate interface by one click
 
@@ -34,37 +34,52 @@ UI pie menu in 3d view with **“F”**
 
 + **drop to floor**  **F-D**
 
-> make the object get onto the floor ! also the with camera or lights ,etc (if selected with mesh)
->
-> **ctrl ：**drop each to floor
->
-> **shift：**drop select to active
->
-> **alt ：**only effect mesh object （work with ctrl shift）
+    > make the object get onto the floor ! also the with camera or lights ,etc (if selected with mesh)
+    >
+    > **ctrl ：**drop each to floor
+    >
+    > **shift：**drop select to active
+    >
+    > **alt ：**only effect mesh object （work with ctrl shift）
 
 + **add cam to view**  **F-A**
 
-> one click add cam to view，then make it the scene cam
->
-> **Ctrl：**add ortho Cam 
->
-> **shift：**add Cam that look at the select object
+    > one click add cam to view，then make it the scene cam
+    >
+    > **Ctrl：**add ortho Cam 
+    >
+    > **shift：**add Cam that look at the select object
 
 + filp cam（x axis default）  **F-F**
 
-> flip the camera ,helpful for checking the composition of the picture
->
-> **ctrl:** z  axis
->
-> **shift:** y axis
+    > flip the camera ,helpful for checking the composition of the picture
+    >
+    > **ctrl:** z  axis
+    >
+    > **shift:** y axis
 
 + enter selected cam **F-E**
 
-> select one and set it scene cam then enter it
+    > select one and set it scene cam then enter it
+    >
+    > **shift** ： popup a cam list to enter
+    > 
+    > > Thanks to Osama Arafa's Camera_SwitchMenu
+    > > Help me learned to call ops in ops
 
 + select and export obj (to where your blend file located)
 
-> export selected object ,name with the first obj(a,001,etc)
+    > export selected object ,name with the first obj(a,001,etc)
+
++ **pick focus**
+
+    > enable dof and pick the foucus on mesh 
+    >
+    > **shift **: generate a target[name with cam] at the point you pick 
+
++ light check/look
+
+    > swith contrast look /false color to check the lighting of the scene
 
 
 
@@ -114,8 +129,20 @@ UI pie menu in 3d view with **“F”**
 + 进入所选相机视角 **F-E**
 
     > 进入选中的相机
+    >
+    > **shift**: 弹出相机菜单
 
 + 导出所选为obj (到blend文件目录下)
 
     > 以选中的第一个物体的名字 [字母排序为准] 为文件名，导出为obj格式到blend文件目录下
     > 免去选择路径和键入命名的步骤，更加方便管理
+
++ 拾取焦点
+
+    > 在所点击的位置设置对焦点（自动打开景深）
+    >
+    > **shift **：在对焦点生成一个以相机命名的空物体作为对焦物体
+
++ 灯光检查
+
+    > 设置不同的对比度/false color 来检测场景
