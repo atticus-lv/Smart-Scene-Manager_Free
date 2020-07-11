@@ -3,7 +3,10 @@ import os
 
 
 class TransPSR(bpy.types.Operator):
-    """Transform selected object(s) to active """
+    """Transform selected object(s) to active
+ctrl: trans R
+shift: trans S
+(alt: not trans P)"""
     bl_idname = "object.trans_psr"
     bl_label = "TransPSR"
     bl_options = {'REGISTER', 'UNDO'}
@@ -15,6 +18,7 @@ class TransPSR(bpy.types.Operator):
     def invoke(self, context,event):
         active = bpy.context.active_object
         objs = bpy.context.selected_objects
+
         #GET
         def get_TL():
             for obj in objs:
@@ -52,24 +56,28 @@ class TransPSR(bpy.types.Operator):
                 if obj != active:
                     obj.scale = TS
 
-
+        #main
         if len(objs) == 1:
             self.report({'ERROR'}, ' select 2 more object .')
         else:
-            TL = get_TL()
-            apply_TL(TL)
-
+            if not event.alt:
+                TL = get_TL()
+                apply_TL(TL)
+            
             if event.ctrl:
                 TR = get_TR()
                 apply_TR(TR)
-            elif event.shift:
+
+            if event.shift:
                 TS =get_TS()
                 apply_TS(TS)
-            elif event.ctrl and event.shift:
+
+            if event.ctrl and event.shift:
                 TR = get_TR()
                 apply_TR(TR)
                 TS = get_TS()
                 apply_TS(TS)
+
 
         return {'FINISHED'}
 
@@ -131,10 +139,10 @@ ctrl: change to false color"""
     def invoke(self, context,event):
         Looks = ['Very Low Contrast', 'Low Contrast', 'Medium Contrast',
                  'Medium High Contrast','High Contrast', 'Very High Contrast','None']
-
         look = bpy.context.scene.view_settings.look
         CM = bpy.context.scene.view_settings.view_transform
         i = Looks.index(look)
+        #loop
         if i < 6:
             i += 1
         else:
@@ -145,13 +153,11 @@ ctrl: change to false color"""
         if event.ctrl:
             if i > 0:
                 bpy.context.scene.view_settings.look = Looks[i-1]
-
             else:
                 bpy.context.scene.view_settings.look = Looks[6]
 
             if CM != 'False Color':
                 bpy.context.scene.view_settings.view_transform= 'False Color'
-
             else:
                 bpy.context.scene.view_settings.view_transform = 'Filmic'
 

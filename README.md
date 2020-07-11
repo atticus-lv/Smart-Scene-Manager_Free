@@ -27,6 +27,8 @@ UI pie menu in 3d view with **“F”**
     > **shift** ：trans scale & location
     >
     > **ctrl shift**： PSR transform
+    >
+    > (**alt**: not trans location)  *work with ctrl shift*
 
 + translate interface by one click
 
@@ -40,7 +42,7 @@ UI pie menu in 3d view with **“F”**
     >
     > **shift：**drop select to active
     >
-    > **alt ：**only effect mesh object （work with ctrl shift）
+    > (**alt ：**only effect mesh object )  *work with ctrl shift*
 
 + **add cam to view**  **F-A**
 
