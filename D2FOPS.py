@@ -40,41 +40,43 @@ shift : drop 2 active
                     NOL = obj.location[2]
                     maxz = NOL
 
+        vertex_List.sort()
+
         try:
-            vertex_List.sort()
-        except IndexError as e:
-            obj.location[2] = 0
+            for obj in objs:
+                mx = obj.matrix_world
+                mx.translation.z -= vertex_List[0]
+                # move mesh
+                if obj in mesh_List:
+                    minz = min((mx @ v.co)[2] for v in obj.data.vertices)
+                    if event.shift :
+                        if obj == active:
+                            obj.location[2] = OL
+                        else:
+                            minz = min((mx @ v.co)[2] for v in obj.data.vertices)
+                            mx.translation.z -= minz - maxz
+                    if event.ctrl:
+                        mx.translation.z -= minz
 
-        for obj in objs:
-            mx = obj.matrix_world
-            mx.translation.z -= vertex_List[0]
-            # move mesh
-            if obj in mesh_List:
-                minz = min((mx @ v.co)[2] for v in obj.data.vertices)
-                if event.shift :
-                    if obj == active:
-                        obj.location[2] = OL
-                    else:
-                        minz = min((mx @ v.co)[2] for v in obj.data.vertices)
-                        mx.translation.z -= minz - maxz
-                if event.ctrl:
-                    mx.translation.z -= minz
-
-            if obj in other_List and len(other_List) != 0:
-                # move not-mesh
-                if event.alt :
-                    mx.translation.z += vertex_List[0]
-                if event.shift:
-                    if obj == active:
-                        obj.location[2]= NOL
-                    else:
+                if obj in other_List and len(other_List) != 0:
+                    # move not-mesh
+                    if event.alt :
+                        mx.translation.z += vertex_List[0]
+                    if event.shift:
+                        if obj == active:
+                            obj.location[2]= NOL
+                        else:
+                            if event.alt:
+                                obj.location[2] = other_Z[other_List.index(obj)]
+                            else:
+                                obj.location[2] = maxz
+                    if event.ctrl:
+                        obj.location[2] =0
                         if event.alt:
                             obj.location[2] = other_Z[other_List.index(obj)]
-                        else:
-                            obj.location[2] = maxz
-                if event.ctrl:
-                    obj.location[2] =0
-                    if event.alt:
-                        obj.location[2] = other_Z[other_List.index(obj)]
+
+        except IndexError as e:
+            for obj in objs:
+                  obj.location[2] = 0
 
         return {'FINISHED'}
