@@ -1,16 +1,19 @@
-# Little function 
+# Little function [free version]
 
-### [blender 2.8+ addon ]
+### Pose your object & Set your shot *In Few Clicks*
 
-#### V 0.31：
+[blender 2.8+ addon ]
 
-1. add focus picker，camlist
-2. rewrite d2f
-3. fix error
+#### V 0.32：
+
+1. fix code, add license
 
 ### Intro (EN)
 
-When building my scene,some repeated steps make me not happy…So I make this small addon to improve my workflow.Hope you will like it
+When building my scene,some repeated steps make me not happy…So I make this small addon to improve my workflow.Hope you will like it. ***This will be the last free version ,which comply with GPL protocol.***
+
+在构建场景中，经常会做一些重复的步骤，就把这些步骤制作为简单的插件
+插件将命名为 Little function，即小功能合集。希望你喜欢它. ***这将是基于GPL协议的最后一个免费版本***
 
 ![image-20200710225604473](image/image-20200710225604473.png)
 
@@ -32,7 +35,7 @@ UI pie menu in 3d view with **“F”**
 
 + translate interface by one click
 
-> English is not my native language,so switch between English might be useful
+	> English is not my native language,so switch between English might be useful
 
 + **drop to floor**  **F-D**
 
@@ -87,9 +90,7 @@ UI pie menu in 3d view with **“F”**
 
 ### Intro CN
 
-在构建场景中，经常会做一些重复的步骤，就把这些步骤制作为简单的插件
-
-插件将命名为 Little function，即小功能合集
+**中文介绍视频：https://www.bilibili.com/video/BV1b54y1q7dd**
 
 可以在3D视窗中**按F键**呼出饼菜单
 

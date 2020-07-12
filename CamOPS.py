@@ -231,15 +231,6 @@ shift: generate empty target'''
 
         return {'RUNNING_MODAL'}
 
-
-    def invoke(self, context, event):
-        if context.space_data.type == 'VIEW_3D':
-            context.window_manager.modal_handler_add(self)
-            return {'RUNNING_MODAL'}
-        else:
-            self.report({'WARNING'}, "Active space must be a View3d")
-            return {'CANCELLED'}
-
     def invoke(self, context, event):
         if context.space_data.type == 'VIEW_3D':
             context.window_manager.modal_handler_add(self)

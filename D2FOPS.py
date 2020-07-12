@@ -27,7 +27,6 @@ shift : drop 2 active
             if obj.type == "MESH":
                 minz = min((mx @ v.co)[2] for v in obj.data.vertices)
                 if obj == active:
-                    minz = min((mx @ v.co)[2] for v in obj.data.vertices)
                     OL = obj.location[2]
                     maxz = max((mx @ v.co)[2] for v in obj.data.vertices)
                 mesh_List.append(obj)
@@ -44,8 +43,7 @@ shift : drop 2 active
         try:
             vertex_List.sort()
         except IndexError as e:
-            active.location[2] = 0
-
+            obj.location[2] = 0
 
         for obj in objs:
             mx = obj.matrix_world
@@ -61,7 +59,6 @@ shift : drop 2 active
                         mx.translation.z -= minz - maxz
                 if event.ctrl:
                     mx.translation.z -= minz
-
 
             if obj in other_List and len(other_List) != 0:
                 # move not-mesh
