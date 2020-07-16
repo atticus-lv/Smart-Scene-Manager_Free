@@ -10,10 +10,10 @@
 
 ### Intro (EN)
 
-When building my scene,some repeated steps make me not happy…So I make this small addon to improve my workflow.Hope you will like it. ***This will be the last free version ,which comply with GPL protocol.***
+When building my scene,some repeated steps make me not happy…So I make this small addon to improve my workflow.Hope you will like it. ***This will be the last free version.***
 
 在构建场景中，经常会做一些重复的步骤，就把这些步骤制作为简单的插件
-插件将命名为 Little function，即小功能合集。希望你喜欢它. ***这将是基于GPL协议的最后一个免费版本***
+插件将命名为 Little function，即小功能合集。希望你喜欢它. ***这将是最后一个免费版本***
 
 ![image-20200710225604473](image/image-20200710225604473.png)
 
