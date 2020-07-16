@@ -145,18 +145,17 @@ UNDO : ctrl z """
         try:
             cam = bpy.context.scene.camera
             cam.select_set(True)
-            if event.ctrl:
-                bpy.ops.transform.resize(value=(-1, 1, -1), orient_type='GLOBAL',
-                                         orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)), orient_matrix_type='GLOBAL',
-                                         constraint_axis=(True, False, False))
-            if event.shift:
-                bpy.ops.transform.resize(value=(-1, -1, 1), orient_type='GLOBAL',
-                                         orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)), orient_matrix_type='GLOBAL',
-                                         constraint_axis=(True, False, False))
 
-            bpy.ops.transform.resize(value=(-1, 1, 1), orient_type='GLOBAL',
-                                     orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)), orient_matrix_type='GLOBAL',
-                                     constraint_axis=(True, False, False))
+            if event.ctrl:
+                bpy.context.object.scale[2] *= -1
+                bpy.context.object.scale[0] *= -1
+
+            if event.shift:
+                bpy.context.object.scale[1] *= -1
+                bpy.context.object.scale[0] *= -1
+
+            bpy.context.object.scale[0] *= -1
+
         except AttributeError as e:
             self.report({'ERROR'}, 'No scene camera.')
             # self.report({'INFO'}, 'No scene camera.')
