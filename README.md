@@ -1,4 +1,4 @@
-# Little function [free version]
+# Smart-Scene-Manager_Free
 
 ### Pose your object & Set your shot *In Few Clicks*
 
